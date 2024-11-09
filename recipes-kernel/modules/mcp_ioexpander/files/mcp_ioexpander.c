@@ -10,29 +10,34 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Jacek Schneider");
 MODULE_DESCRIPTION("mcp23017 driver");
 
+#define INTCAPA	0x8
+#define INTCAPB	0x18
+
 struct mcp23017_dev
 {
     struct i2c_client*  client;
     struct gpio_chip chip;
 };
 
-// struct gpio_chip mcp_gpio_chip =
-// {
-//     .label = "mcp23017",
-//     .owner = THIS_MODULE,
-//     .base = -1,
-//     .ngpio = 16,
-//     .can_sleep = true,
-//     .get = mcp_gpio_get,
-//     .set = mcp_gpio_set,
-//     .direction_input = mcp_gpio_input,
-//     .direction_output = mcp_gpio_output,
-// };
+static inline struct mcp23017_dev *to_mcp23017_dev(struct gpio_chip *gc)
+{
+	return container_of(gc, struct mcp23017_dev, chip);
+}
 
-static int mcp_gpio_get(struct gpio_chip *chip, unsigned offset) {return 1;};
-static void mcp_gpio_set(struct gpio_chip *chip, unsigned offset, int index){;};
+static int mcp_gpio_get(struct gpio_chip *chip, unsigned offset) 
+{
+    s32 value;
+    struct mcp23017_dev* mcp = to_mcp23017_dev(chip);
+    unsigned bank = offset / 8;
+    unsigned bit = offset % 8;
+
+    u8 reg_intcap = (bank == 0) ? INTCAPA : INTCAPB;
+    value = i2c_smbus_read_byte_data(mcp->client, reg_intcap);
+    return (value >= 0) ? (value >> bit) & 0x1 : 0;
+}
+static void mcp_gpio_set(struct gpio_chip *chip, unsigned offset, int value){;};
 static int mcp_gpio_input(struct gpio_chip *chip, unsigned offset){return 1;};
-static int mcp_gpio_output(struct gpio_chip *chip, unsigned offset, int index){return 1;};
+static int mcp_gpio_output(struct gpio_chip *chip, unsigned offset, int value){return 1;};
 
 static int mcp23017_probe(struct i2c_client* client, const struct i2c_device_id *id){
     struct mcp23017_dev* mcp;
