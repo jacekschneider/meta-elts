@@ -40,6 +40,7 @@ static int mcp_gpio_input(struct gpio_chip *chip, unsigned offset){return 1;};
 static int mcp_gpio_output(struct gpio_chip *chip, unsigned offset, int value){return 1;};
 
 static int mcp23017_probe(struct i2c_client* client, const struct i2c_device_id *id){
+    printk("Mcp23017 probe\n");
     struct mcp23017_dev* mcp;
 
     if(!i2c_check_functionality(client->adapter, I2C_FUNC_SMBUS_BYTE_DATA))

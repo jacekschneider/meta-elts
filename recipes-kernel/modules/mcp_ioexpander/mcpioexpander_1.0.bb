@@ -1,14 +1,14 @@
 DESCRIPTION = "mcp gpio i2c expander module"
 LICENSE = "CLOSED"
 
-SRC_URI = "file://mcp_ioexpander.c \
-            file://Makefile"
+SRC_URI = "file://mcp_ioexpander.c;subdir=${S} \
+           file://Makefile;subdir=${S}"
 
 inherit module
 
 KERNEL_MODULE_PROBECONF = "mcp_ioexpander"
 
-S = "${WORKDIR}"
+S = "${WORKDIR}/mcp_ioexpander"
 
 COMPATIBLE_MACHINE = "raspberrypi4-64"
 
