@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "init.h": "c",
-        "module.h": "c",
-        "memory": "c",
-        "functional": "c"
-    }
-}
