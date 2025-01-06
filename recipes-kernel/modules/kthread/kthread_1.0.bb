@@ -1,14 +1,14 @@
 DESCRIPTION = "Basic kernel module for multithreading"
 LICENSE = "CLOSED"
 
-SRC_URI = "file://kthread.c \
-            file://Makefile"
+SRC_URI = "file://kthread.c;subdir=${S} \
+            file://Makefile;subdir=${S}"
 
 inherit module
 
 KERNEL_MODULE_PROBECONF = "kthread"
 
-S = "${WORKDIR}"
+S = "${WORKDIR}/kthread"
 
 COMPATIBLE_MACHINE = "raspberrypi4-64"
 
