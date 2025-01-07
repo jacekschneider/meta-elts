@@ -1,41 +1,26 @@
-This README file contains information on the contents of the meta-jsch layer.
+This README file contains information on the contents of the meta-elts layer.
 
 Please see the corresponding sections below for details.
 
 Dependencies
 ============
 
-  URI: <first dependency>
-  branch: <branch name>
+  URI: git://github.com/jacekschneider/mcp23017.git;protocol=https
+  branch: main
 
-  URI: <second dependency>
-  branch: <branch name>
-
-  .
-  .
-  .
-
-Patches
-=======
-
-Please submit any patches against the meta-jsch layer to the xxxx mailing list (xxxx@zzzz.org)
-and cc: the maintainer:
-
-Maintainer: XXX YYYYYY <xxx.yyyyyy@zzzzz.com>
 
 Table of Contents
 =================
 
-  I. Adding the meta-jsch layer to your build
+  I. Adding the meta-elts layer to your build
  II. Misc
 
 
-I. Adding the meta-jsch layer to your build
+I. Adding the meta-elts layer to your build
 =================================================
 
-Run 'bitbake-layers add-layer meta-jsch'
+Run 'bitbake-layers add-layer meta-elts'
 
 II. Misc
 ========
 
---- replace with specific information about the meta-jsch layer ---

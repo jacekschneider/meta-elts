@@ -4,6 +4,8 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 SRC_URI = "file://mcp23017.dts"
 
+DEPENDS += "dtc-native"
+
 do_compile() {
     dtc -I dts -O dtb -o ${WORKDIR}/mcp23017.dtbo ${WORKDIR}/mcp23017.dts
 }
