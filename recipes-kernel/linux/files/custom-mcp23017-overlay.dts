@@ -3,19 +3,19 @@
 
  / {
      fragment@0 {
-         target = <&i2c1>; // Replace with the correct I2C bus node
+         target = <&i2c1>; 
 
          __overlay__ {
              #address-cells = <1>;
              #size-cells = <0>;
 
              mcp23017@27 {
-                 compatible = "microchip,mcp23017";
+                 compatible = "waveshare,mcp23017";
                  reg = <0x27>;  // Address of the I2C expander
                  gpio-controller;
                  #gpio-cells = <2>;
-                 interrupt-parent = <&gpio>;  // Optional: Use if interrupts are connected
-                 interrupts = <17 2>;  // Adjust based on your wiring (GPIO pin and type)
+                 interrupt-parent = <&gpio>;  
+                 interrupts = <17 2>;  
              };
          };
      };
