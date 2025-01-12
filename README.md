@@ -67,13 +67,6 @@ To include the `meta-elts` layer in your build, follow these steps:
 
 After adding the `meta-elts` layer to your build configuration, you can utilize the recipes and configurations it provides. Refer to the specific recipes within the layer for detailed usage instructions.
 
-## Maintainer
-
-For any questions or contributions, please contact:
-
-- **Name**: Jacek Schneider
-- **Email**: [your-email@example.com](mailto:your-email@example.com)
-
 ## License
 
 This layer is licensed under the MIT License. See the `LICENSE` file for more details.
