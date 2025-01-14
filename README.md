@@ -51,15 +51,15 @@ To include the `meta-elts` layer in your build, follow these steps:
 
    ```bash
    BBLAYERS ?= " \
-     /home/jacek/Documents/yocto/poky/meta \
-     /home/jacek/Documents/yocto/poky/meta-poky \
-     /home/jacek/Documents/yocto/poky/meta-yocto-bsp \
-     /home/jacek/Documents/yocto/meta-openembedded/meta-oe \
-     /home/jacek/Documents/yocto/meta-openembedded/meta-python \
-     /home/jacek/Documents/yocto/meta-openembedded/meta-networking \
-     /home/jacek/Documents/yocto/meta-openembedded/meta-multimedia \
-     /home/jacek/Documents/yocto/meta-raspberrypi \
-     /home/jacek/Documents/yocto/meta-elts \
+     ../poky/meta \
+     ../poky/meta-poky \
+     ../poky/meta-yocto-bsp \
+     ../meta-openembedded/meta-oe \
+     ../meta-openembedded/meta-python \
+     ../meta-openembedded/meta-networking \
+     ../meta-openembedded/meta-multimedia \
+     ../meta-raspberrypi \
+     ../meta-elts \
      "
    ```
 
