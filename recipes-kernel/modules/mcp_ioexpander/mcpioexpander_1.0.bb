@@ -19,4 +19,9 @@ do_compile() {
 do_install() {
     install -d ${D}${base_libdir}/modules/${KERNEL_VERSION}/extra
     install -m 0644 ${S}/mcp_ioexpander.ko ${D}${base_libdir}/modules/${KERNEL_VERSION}/extra
+
+    install -d ${D}${bindir}
+    install -m 0755 ${S}/test.py ${D}${bindir}/test.py
 }
+
+FILES:${PN} += "${bindir}/test.py"
