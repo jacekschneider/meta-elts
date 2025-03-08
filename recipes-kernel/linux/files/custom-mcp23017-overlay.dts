@@ -10,12 +10,14 @@
              #size-cells = <0>;
 
              mcp23017@27 {
-                 compatible = "waveshare,mcp23017";
-                 reg = <0x27>;  // Address of the I2C expander
+                 compatible = "microchip,mcp23017";
+                 reg = <0x27>;  
                  gpio-controller;
                  #gpio-cells = <2>;
-                 interrupt-parent = <&gpio>;  
+                 interrupt-parent = <&gpio1>;  
                  interrupts = <17 2>;  
+                 interrupt-controller;
+                 microchip,irq-mirror;
              };
          };
      };
