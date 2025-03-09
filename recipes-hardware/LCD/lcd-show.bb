@@ -8,6 +8,8 @@ PV = "1.0"
 
 S = "${WORKDIR}/git"
 
+inherit deploy
+
 do_install() {
     # Create necessary directories
     install -d ${D}/boot/overlays
@@ -27,8 +29,15 @@ do_install() {
     install -m 0644 ${S}/usr/inittab ${D}/etc/inittab
 }
 
+do_deploy() {
+    install -d ${DEPLOYDIR}
+    install -m 0664 ${S}/usr/tft35a-overlay.dtb ${DEPLOYDIR}/tft35a.dtbo
+}
 
-FILES_${PN} = " \
+addtask deploy after do_compile
+
+
+FILES:${PN} = " \
     /boot/overlays/tft35a.dtb \
     /boot/overlays/tft35a.dtbo \
     /etc/X11/xorg.conf.d/99-calibration.conf \
