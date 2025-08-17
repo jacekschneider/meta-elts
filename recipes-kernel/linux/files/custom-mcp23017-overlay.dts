@@ -10,7 +10,7 @@
              #size-cells = <0>;
 
              mcp23017@27 {
-                 compatible = "microchip,mcp23017";
+                 compatible = "waveshare,mcp23017";
                  reg = <0x27>;  
                  gpio-controller;
                  #gpio-cells = <2>;
