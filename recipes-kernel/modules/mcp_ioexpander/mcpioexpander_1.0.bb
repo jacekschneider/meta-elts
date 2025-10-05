@@ -6,7 +6,7 @@ SRCREV = "${AUTOREV}"
 
 inherit module
 
-KERNEL_MODULE_PROBECONF = "mcp_ioexpander"
+KERNEL_MODULE_PROBECONF = "pinctrl-mcp23017_i2c"
 
 S = "${WORKDIR}/git"
 
@@ -18,7 +18,7 @@ do_compile() {
 
 do_install() {
     install -d ${D}${base_libdir}/modules/${KERNEL_VERSION}/extra
-    install -m 0644 ${S}/mcp_ioexpander.ko ${D}${base_libdir}/modules/${KERNEL_VERSION}/extra
+    install -m 0644 ${S}/pinctrl-mcp23017_i2c.ko ${D}${base_libdir}/modules/${KERNEL_VERSION}/extra
 
     install -d ${D}${bindir}
     install -m 0755 ${S}/test.py ${D}${bindir}/test.py
