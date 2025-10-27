@@ -49,17 +49,15 @@ IMAGE_INSTALL:append = " motd"
 
 SKIP_TFT35_X11_CONFIGS = "1"
 IMAGE_INSTALL:append = " lcd-show"
-IMAGE_INSTALL:append = " x11-config"
 
 IMAGE_INSTALL:append = " i2c-tools"
 IMAGE_INSTALL:append = " spidev-test"
 IMAGE_INSTALL:append = " libgpiod libgpiod-tools libiio libcamera"
 
 IMAGE_INSTALL:append = " xserver-xorg xinit xterm openbox matchbox-panel-2 matchbox-desktop"
-IMAGE_INSTALL:append = " xf86-video-fbdev"
-IMAGE_INSTALL:append = " xf86-video-fbturbo"
-
 IMAGE_INSTALL:append = " packagegroup-core-x11"
+
+DISTRO_FEATURES:remove = " usrmerge"
 
 RPI_EXTRA_CONFIG = ' \
 hdmi_force_hotplug=1 \n \
@@ -76,5 +74,3 @@ hdmi_drive=2 \n '
 
 IMAGE_INSTALL:append = " python3-spidev"
 
-IMAGE_BOOT_FILES:append = " tft35a.dtbo;overlays/tft35a.dtbo"
-IMAGE_BOOT_FILES:append = " custom-mcp23017.dtbo;overlays/custom-mcp23017.dtbo"

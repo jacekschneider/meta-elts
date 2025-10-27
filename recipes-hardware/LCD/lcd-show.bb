@@ -13,7 +13,6 @@ inherit deploy
 do_install() {
     # Create necessary directories
     install -d ${D}/boot/overlays
-    install -d ${D}/etc
     # Conditional install of X11 calibration and display configs
         if [ "${SKIP_TFT35_X11_CONFIGS}" != "1" ]; then
         install -d ${D}/etc/X11/xorg.conf.d
@@ -21,7 +20,6 @@ do_install() {
     fi
 
     # Copy precompiled TFT35A Device Tree Blob
-    install -m 0644 ${S}/usr/tft35a-overlay.dtb ${D}/boot/overlays/tft35a.dtb
     install -m 0644 ${S}/usr/tft35a-overlay.dtb ${D}/boot/overlays/tft35a.dtbo
 
 
@@ -33,7 +31,6 @@ do_install() {
 
     # Copy boot and system configuration files
     install -m 0644 ${S}/usr/cmdline.txt ${D}/boot/cmdline.txt
-    install -m 0644 ${S}/usr/inittab ${D}/etc/inittab
 }
 
 do_deploy() {
@@ -41,15 +38,9 @@ do_deploy() {
     install -m 0664 ${S}/usr/tft35a-overlay.dtb ${DEPLOYDIR}/tft35a.dtbo
 }
 
-addtask deploy after do_compile
-
-
 FILES:${PN} = " \
-    /boot/overlays/tft35a.dtb \
     /boot/overlays/tft35a.dtbo \
     /boot/cmdline.txt \
-    /etc/inittab \
-    /etc/X11 \
     /etc/X11/xorg.conf.d \
     /usr/share/X11 \
     /usr/share/X11/xorg.conf.d \
