@@ -38,6 +38,8 @@ do_deploy() {
     install -m 0664 ${S}/usr/tft35a-overlay.dtb ${DEPLOYDIR}/tft35a.dtbo
 }
 
+addtask deploy after do_install
+
 FILES:${PN} = " \
     /boot/overlays/tft35a.dtbo \
     /boot/cmdline.txt \
