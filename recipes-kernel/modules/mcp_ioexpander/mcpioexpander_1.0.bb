@@ -10,7 +10,10 @@ KERNEL_MODULE_PROBECONF = "pinctrl-mcp23017_i2c"
 
 S = "${WORKDIR}/git"
 
-COMPATIBLE_MACHINE = "raspberrypi4-64"
+
+do_configure() {
+    oe_runmake -C ${STAGING_KERNEL_DIR} M=${S} clean || true
+}
 
 do_compile() {
     oe_runmake -C ${STAGING_KERNEL_DIR} M=${S} modules
