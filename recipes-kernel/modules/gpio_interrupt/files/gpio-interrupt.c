@@ -14,6 +14,7 @@
 #define GPIO_25_IN  (25)
 
 unsigned int GPIO_irqNumber;
+unsigned long old_jiffie = 0;
 
 dev_t dev=0;
 static struct class *dev_class;
@@ -25,7 +26,7 @@ static void __exit gpioint_driver_exit(void);
 static int gpioint_open(struct inode *inode, struct file *file);
 static int gpioint_release(struct inode *inode, struct file *file);
 static ssize_t gpioint_read(struct file *filp, char __user *buf, size_t len, loff_t *off);
-static ssize_t gpioint_write(struct file *filp, const char __user *buf, size_t len, lofft_t *off);
+static ssize_t gpioint_write(struct file *filp, const char __user *buf, size_t len, loff_t *off);
 static struct file_operations fops =
 {
     .owner = THIS_MODULE,
@@ -60,7 +61,7 @@ static ssize_t gpioint_read(struct file *filp, char __user *buf, size_t len, lof
     return 0;
 }
 
-static ssize_t gpioint_write(struct file *filp, const char __user *buf, size_t len, lofft_t *off)
+static ssize_t gpioint_write(struct file *filp, const char __user *buf, size_t len, loff_t *off)
 {
     uint8_t input[1024];
     if(copy_from_user(input, buf, len) > 0)
@@ -105,7 +106,7 @@ static int __init gpioint_driver_init(void)
     }
 
     /*Create device class*/
-    if(IS_ERR(dev_class = class_create(THIS_MODULE, "gpioint_class")))
+    if(IS_ERR(dev_class = class_create("gpioint_class")))
     {
         pr_err("Couldn't create device class...\n");
         goto r_class;

@@ -11,6 +11,6 @@ SRC_URI = " \
     file://COPYING \
 "
 
-S = "${UNPACKDIR}"
+S = "${WORKDIR}"
 
 RPROVIDES:${PN} += "kernel-module-gpio-interrupt"
