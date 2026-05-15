@@ -11,25 +11,9 @@ S = "${WORKDIR}/git"
 inherit deploy
 
 do_install() {
-    # Create necessary directories
+
     install -d ${D}/boot/overlays
-    # Conditional install of X11 calibration and display configs
-        if [ "${SKIP_TFT35_X11_CONFIGS}" != "1" ]; then
-        install -d ${D}/etc/X11/xorg.conf.d
-        install -d ${D}/usr/share/X11/xorg.conf.d
-    fi
-
-    # Copy precompiled TFT35A Device Tree Blob
     install -m 0644 ${S}/usr/tft35a-overlay.dtb ${D}/boot/overlays/tft35a.dtbo
-
-
-    # Conditional install of X11 calibration and display configs
-    if [ "${SKIP_TFT35_X11_CONFIGS}" != "1" ]; then
-        install -m 0644 ${S}/usr/99-calibration.conf-35-0 ${D}/etc/X11/xorg.conf.d/99-calibration.conf
-        install -m 0644 ${S}/usr/99-fbturbo.conf ${D}/usr/share/X11/xorg.conf.d/
-    fi
-
-    # Copy boot and system configuration files
     install -m 0644 ${S}/usr/cmdline.txt ${D}/boot/cmdline.txt
 }
 

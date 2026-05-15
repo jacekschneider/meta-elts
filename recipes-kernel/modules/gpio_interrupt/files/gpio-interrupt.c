@@ -10,10 +10,12 @@
 #include <linux/gpio.h>
 #include <linux/delay.h>
 #include <linux/err.h>
+#include <linux/jiffies.h>
 
-#define GPIO_25_IN  (25)
+#define GPIO_21_IN  (21)
 
 unsigned int GPIO_irqNumber;
+extern unsigned long volatile jiffies;
 unsigned long old_jiffie = 0;
 
 dev_t dev=0;
@@ -121,28 +123,28 @@ static int __init gpioint_driver_init(void)
 
     //Input GPIO
     /*Check gpio is valid*/
-    if(gpio_is_valid(GPIO_25_IN) == false)
+    if(gpio_is_valid(GPIO_21_IN) == false)
     {
-        pr_err("ERROR: GPIO %d is not valid...\n", GPIO_25_IN);
+        pr_err("ERROR: GPIO %d is not valid...\n", GPIO_21_IN);
         goto r_gpio;
     }
 
     /*Request gpio*/
-    if(gpio_request(GPIO_25_IN, "GPIO_25_IN") < 0)
+    if(gpio_request(GPIO_21_IN, "GPIO_21_IN") < 0)
     {
-        pr_err("ERROR: GPIO %d request...\n", GPIO_25_IN);
+        pr_err("ERROR: GPIO %d request...\n", GPIO_21_IN);
         goto r_gpio;
     }
 
     /*Configure gpio as input*/
-    gpio_direction_input(GPIO_25_IN);
+    gpio_direction_input(GPIO_21_IN);
 
-    if(gpiod_set_debounce(GPIO_25_IN, 200) < 0)
+    if(gpiod_set_debounce(GPIO_21_IN, 200) < 0)
     {
-        pr_err("Error: gpio set debounce -%d...\n", GPIO_25_IN);
+        pr_err("Error: gpio set debounce -%d...\n", GPIO_21_IN);
     }
 
-    GPIO_irqNumber = gpio_to_irq(GPIO_25_IN);
+    GPIO_irqNumber = gpio_to_irq(GPIO_21_IN);
     pr_info("GPIO irq number is %d...\n", GPIO_irqNumber);
 
     if(request_irq(GPIO_irqNumber, (void*)gpio_irq_handler, IRQF_TRIGGER_RISING, "gpioint_device", NULL))
@@ -154,7 +156,7 @@ static int __init gpioint_driver_init(void)
     pr_info("gpioint driver inserted successfully...\n");
     return 0;
 r_gpio:
-    gpio_free(GPIO_25_IN);
+    gpio_free(GPIO_21_IN);
 r_device:
     device_destroy(dev_class, dev);
 r_class:
@@ -169,7 +171,7 @@ r_unreg:
 static void __exit gpioint_driver_exit(void)
 {
     free_irq(GPIO_irqNumber, NULL);
-    gpio_free(GPIO_25_IN);
+    gpio_free(GPIO_21_IN);
     device_destroy(dev_class, dev);
     class_destroy(dev_class);
     cdev_del(&gpioint_cdev);
