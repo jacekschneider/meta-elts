@@ -37,3 +37,6 @@ IMAGE_INSTALL:append = " motd"
 IMAGE_INSTALL:append = " modules-conf"
 IMAGE_INSTALL:append = " os-release"
 IMAGE_INSTALL:append = " lcd-show"
+
+# rauc
+IMAGE_INSTALL:append = " rauc"
