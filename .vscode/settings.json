@@ -3,6 +3,16 @@
         "init.h": "c",
         "module.h": "c",
         "memory": "c",
-        "functional": "c"
-    }
+        "functional": "c",
+        "*.conf": "bitbake",
+        "*.inc": "bitbake"
+    },
+    "python.autoComplete.extraPaths": [
+        "${workspaceFolder}/poky/bitbake/lib",
+        "${workspaceFolder}/poky/meta/lib"
+    ],
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}/poky/bitbake/lib",
+        "${workspaceFolder}/poky/meta/lib"
+    ]
 }
